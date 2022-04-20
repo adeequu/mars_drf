@@ -7,7 +7,9 @@ from post.models import Post
 from rest_framework.generics import(
     CreateAPIView,
     ListAPIView,
-    RetrieveAPIView
+    RetrieveAPIView,
+    UpdateAPIView,
+    DestroyAPIView,
 )
 
 
@@ -46,4 +48,19 @@ class PostDetailAPIView(RetrieveAPIView):
     authentication_classes = []
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+
+class PostUpdateAPIView(UpdateAPIView):
+    permission_classes = []
+    authentication_classes = []
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+
+class PostDestroyAPIView(DestroyAPIView):
+    permission_classes = []
+    authentication_classes = []
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
 
