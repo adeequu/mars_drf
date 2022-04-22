@@ -1,7 +1,8 @@
+from rest_framework.authentication import SessionAuthentication
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-
+from accounts.api import permissions
 from post.api.serializers import PostSerializer
 from post.models import Post
 from rest_framework.generics import(
@@ -24,8 +25,8 @@ from rest_framework.generics import(
 
 
 class PostListAPIView(ListAPIView):
-    permission_classes = []
-    authentication_classes = []
+    permission_classes = [permissions.IsOwnerOrReadOnly] #
+    authentication_classes = [SessionAuthentication]
     serializer_class = PostSerializer
 
     def get_queryset(self):
@@ -44,10 +45,11 @@ class PostCreateAPIView(CreateAPIView): #write this to create post from api not 
 
 
 class PostDetailAPIView(RetrieveAPIView):
-    permission_classes = []
-    authentication_classes = []
+    permission_classes = [permissions.IsOwnerOrReadOnly]
+    authentication_classes = [SessionAuthentication]
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    lookup_field = 'id'
 
 
 class PostUpdateAPIView(UpdateAPIView):
@@ -55,6 +57,7 @@ class PostUpdateAPIView(UpdateAPIView):
     authentication_classes = []
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    lookup_field = 'id'
 
 
 class PostDestroyAPIView(DestroyAPIView):
@@ -62,5 +65,6 @@ class PostDestroyAPIView(DestroyAPIView):
     authentication_classes = []
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    lookup_field = 'id'
 
 

@@ -5,7 +5,7 @@ from .views import PostListAPIView, PostCreateAPIView, PostDetailAPIView, PostUp
 urlpatterns = [
     path('', PostListAPIView.as_view(), name='list'),
     path('create/', PostCreateAPIView.as_view(), name='create'),
-    path('<int:pk>/', PostDetailAPIView.as_view(), name='detail'),
-    path('<int:pk>/update/', PostUpdateAPIView.as_view(), name='update'),
-    path('<int:pk>/delete/', PostDestroyAPIView.as_view(), name='delete'),
+    path('<int:id>/', PostDetailAPIView.as_view(), name='detail'),
+    path('<int:id>/update/', PostUpdateAPIView.as_view(), name='update'),
+    path('<int:id>/delete/', PostDestroyAPIView.as_view(), name='delete'),
 ]
