@@ -7,7 +7,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        return obj.user == request.user
+        return obj.user == request.user #if user is author, the details of post can be viewed only by author
 
 
 class AnonPermissionOnly(permissions.BasePermission):
